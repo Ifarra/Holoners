@@ -134,4 +134,17 @@ public class account {
 		System.out.println(this.username);
 		System.out.println(this.role);
 	}
+	
+	public String registeracc() {
+		account acc = new account();
+        acc.setAccID(0);
+        acc.setUsername(username);
+        acc.setPassword(password);
+        acc.setEmail(email);
+        acc.setRole(role);
+
+      	accountDAO accdao = new accountDAO();
+      	accdao.saveacc(acc);
+      	return "admin";
+	}
 }

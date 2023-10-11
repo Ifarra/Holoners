@@ -90,20 +90,13 @@
 									
 								</div>
 								<div class="col-sm-5 col-md-6 col-12 pb-4">
-									<h:form id="algin-form" action="">
+									<h:form id="algin-form">
 										<div class="form-group">
 											<h3 class="mb-3  text-light">Leave a comment</h3>
-											<h:inputHidden type="text" value="" />
-											<h:inputHidden type="text" value="" />
-											<h:inputHidden type="text" value="" />
-											<h:inputHidden type="text" value="" />
-											<h:inputHidden type="text" value="" />
-											<h:inputTextarea name="msg" id="textguhplis" msg="msg" cols="30" rows="5"
-												class="form-control text-light"
-												style="background-color: black;" />
+											<h:inputTextarea name="msg" id="textguhplis" value="#{comment.content}" msg="msg" cols="30" rows="5" class="form-control text-light" style="background-color: black;"  />
 										</div>
 										<div class="form-group">
-											<h:commandButton id="post" value="Send" class="btn" />
+											<h:commandButton value="Seed" class="btn btn-light" action="#{comment.commentadd(account.email, 'community', ctemp.talent.communityID)}" />
 										</div>
 									</h:form>
 								</div>

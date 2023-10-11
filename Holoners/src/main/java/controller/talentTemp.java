@@ -10,6 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import model.talentDAO;
+
 @SuppressWarnings("deprecation")
 @ManagedBean(name=("ttemp"))
 @SessionScoped
@@ -86,5 +88,70 @@ public class talentTemp {
             e.printStackTrace();
         }
     }
+    
+    public void selecttalent(String id) {
+		int guh = Integer.valueOf(id);
+        // Initialize Hibernate session
+        try {
+        	Configuration configuration = new Configuration()
+                    .configure("hibernate.cfg.xml")
+                    .addAnnotatedClass(talent.class);
+     		// Create a SessionFactory
+     		SessionFactory sf = configuration.buildSessionFactory();
+     	        
+     		// Open a session
+     		Session session = sf.openSession(); 
+            Query<talent> query = session.createQuery("FROM talent t WHERE t.talentID = :selectedId", talent.class);
+            query.setParameter("selectedId", guh);
+
+            // Execute the query and get the result
+            talent = query.uniqueResult();
+
+            if (talent == null) {
+                // Handle the case when no matching row is found
+                talent = new talent();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void selectarticle(String id) {
+		int guh = Integer.valueOf(id);
+        // Initialize Hibernate session
+        try {
+        	Configuration configuration = new Configuration()
+                    .configure("hibernate.cfg.xml")
+                    .addAnnotatedClass(talent.class);
+     		// Create a SessionFactory
+     		SessionFactory sf = configuration.buildSessionFactory();
+     	        
+     		// Open a session
+     		Session session = sf.openSession(); 
+            Query<talent> query = session.createQuery("FROM talent t WHERE t.articleID = :talentId", talent.class);
+            query.setParameter("selectedId", guh);
+
+            // Execute the query and get the result
+            talent = query.uniqueResult();
+
+            if (talent == null) {
+                // Handle the case when no matching row is found
+                talent = new talent();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
+	public void modify() {
+		talentDAO accdao = new talentDAO();
+      	accdao.updatetalent(talent);
+     
+	}
+	
+	public void ambatuc(String id) {
+		talentDAO accdao = new talentDAO();
+      	accdao.deleteTalent(id);
+	}
 	
 }

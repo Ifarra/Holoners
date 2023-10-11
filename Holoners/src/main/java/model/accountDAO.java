@@ -168,6 +168,8 @@ public class accountDAO {
     	      
     	      tx.commit();
     	      
+    	      sf.close();
+    	      
     	      return guh;
     	      
     }
@@ -195,8 +197,30 @@ public class accountDAO {
     	      
     	      tx.commit();
     	      
+    	      sf.close();
+    	      
     	      return guh;
     	      
     }
+	
+	@SuppressWarnings("removal")
+	public void deleteAcc(String id) {
+		
+		Configuration configuration = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(account.class);
+	  // Create a SessionFactory
+     SessionFactory sf = configuration.buildSessionFactory();
+ 	        
+     // Open a session
+     Session session = sf.openSession(); 
+     
+     // Begin a transaction
+     Transaction tx = session.beginTransaction();
+     account acc = (account)session.load(account.class, new Integer(Integer.valueOf(id)));
+     session.delete(acc);
+     tx.commit();
+     sf.close();
+	}
 	
 }

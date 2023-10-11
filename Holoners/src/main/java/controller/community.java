@@ -1,12 +1,17 @@
 package controller;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@ManagedBean(name="communtiy")
+import model.communityDAO;
+
+@ManagedBean(name = "communtiy" )
 @SessionScoped
 @Entity
 @Table(name="community")
@@ -57,5 +62,27 @@ public class community {
 		this.date = date;
 	}
 	
+	public List<community> getdatatbl() {
+		System.out.println("Community");
+		communityDAO guh = new communityDAO();
+		List<community> meh = guh.ambildatasemuanya();
+		return meh;
+	}
+	
+	public void register() {
+		Date cd = new Date();
+		String meh = String.valueOf(cd);
+		community acc = new community();
+        acc.setCommunityID(0);
+        acc.setContent(content);
+        acc.setDate(meh);
+        acc.setIframe(iframe);
+        acc.setTitle(title);
+        acc.setUsername(username);
+
+      	communityDAO accdao = new communityDAO();
+      	accdao.savecommunity(acc);
+     
+	}
 	
 }

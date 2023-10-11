@@ -9,41 +9,18 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import controller.account;
-import controller.talent;
+import controller.community;
 
 @SuppressWarnings("deprecation")
-public class talentDAO {
+public class communityDAO {
 
-	public static List<talent> getAllRecords() {
-	    List<talent> list = new ArrayList<talent>();
-
-	    try {
-	    	Configuration configuration = new Configuration()
-                    .configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(account.class);
-     		// Create a SessionFactory
-     		SessionFactory sf = configuration.buildSessionFactory();
-     	        
-     		// Open a session
-     		Session session = sf.openSession(); 
-	    	
-	        Query<talent> query = session.createQuery("FROM Book", talent.class);
-	        list = query.list();
-	    } catch (Exception e) {
-	        System.out.println(e);
-	    }
-	    
-	    return list;
-	}
-	
 	@SuppressWarnings("unchecked")
-	public List<talent> ambildatasemuanya(){
-    	List<talent> guh = new ArrayList<talent>();
+	public List<community> ambildatasemuanya(){
+    	List<community> guh = new ArrayList<community>();
     	// Open the Configuration
     	 		Configuration configuration = new Configuration()
     	                 .configure("hibernate.cfg.xml")
-    	                 .addAnnotatedClass(talent.class);
+    	                 .addAnnotatedClass(community.class);
     		  // Create a SessionFactory
     	      SessionFactory sf = configuration.buildSessionFactory();
     	  	        
@@ -53,7 +30,7 @@ public class talentDAO {
     	      // Begin a transaction
     	      Transaction tx = session.beginTransaction();
     	      
-    	      Query<talent> query = session.createQuery("FROM talent");
+    	      Query<community> query = session.createQuery("FROM community");
 
     	      
     	      guh = query.list();
@@ -66,11 +43,11 @@ public class talentDAO {
     	      
     }
 	
-	public void savetalent(talent acc) {
+	public void savecommunity(community acc) {
     	// Open the Configuration
  		Configuration configuration = new Configuration()
                  .configure("hibernate.cfg.xml")
-                 .addAnnotatedClass(talent.class);
+                 .addAnnotatedClass(community.class);
 	  // Create a SessionFactory
       SessionFactory sf = configuration.buildSessionFactory();
   	        
@@ -92,11 +69,11 @@ public class talentDAO {
       System.out.println("CLEAR");
     }
 	
-	public void updatetalent(talent acc) {
+	public void updatecommunity(community acc) {
     	// Open the Configuration
  		Configuration configuration = new Configuration()
                  .configure("hibernate.cfg.xml")
-                 .addAnnotatedClass(talent.class);
+                 .addAnnotatedClass(community.class);
 	  // Create a SessionFactory
       SessionFactory sf = configuration.buildSessionFactory();
   	        
@@ -119,11 +96,11 @@ public class talentDAO {
     }
 	
 @SuppressWarnings("removal")
-public void deleteTalent(String id) {
+public void deleteCommunity(String id) {
 		
 		Configuration configuration = new Configuration()
                 .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(talent.class);
+                .addAnnotatedClass(community.class);
 	  // Create a SessionFactory
      SessionFactory sf = configuration.buildSessionFactory();
  	        
@@ -132,7 +109,7 @@ public void deleteTalent(String id) {
      
      // Begin a transaction
      Transaction tx = session.beginTransaction();
-     talent acc = (talent)session.load(talent.class, new Integer(Integer.valueOf(id)));
+     community acc = (community)session.load(community.class, new Integer(Integer.valueOf(id)));
      session.delete(acc);
      tx.commit();
      sf.close();

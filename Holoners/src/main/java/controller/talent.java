@@ -1,11 +1,15 @@
 package controller;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import model.talentDAO;
 
 @ManagedBean(name="talent")
 @SessionScoped
@@ -96,6 +100,28 @@ public class talent {
 		this.img = img;
 	}
 	
+	public List<talent> getdatatbl() {
+		talentDAO guh = new talentDAO();
+		List<talent> meh = guh.ambildatasemuanya();
+		return meh;
+	}
 	
+	public String register() {
+		talent acc = new talent();
+        acc.setTalentID(0);
+        acc.setBio(bio);
+        acc.setBranch(branch);
+        acc.setImg(img);
+        acc.setFanname(fanname);
+        acc.setPersonality(personality);
+        acc.setOverview(overview);
+        acc.setJpname(jpname);
+        acc.setDebut(debut);
+        acc.setName(name);
+
+        talentDAO accdao = new talentDAO();
+      	accdao.savetalent(acc);
+      	return "admin";
+	}
 	
 }
